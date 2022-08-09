@@ -73,7 +73,7 @@ func FindDifferenceInMinutes(firstDate, secondDate time.Time) float64 {
 	return secondDate.Sub(firstDate).Minutes()
 }
 
-func ReadFileByLine(file string, pattern string) (lineContent []string) {
+func ReadFileByLine(file, pattern string, maxlines int) (lineContent []string) {
 	f, err := os.Open(file)
 	if err != nil {
 		log.Fatal(err)
@@ -96,7 +96,7 @@ func ReadFileByLine(file string, pattern string) (lineContent []string) {
 		log.Fatal(err)
 	}
 	lineNumber := 1
-	for scanner.Scan() {
+	for scanner.Scan() && lineNumber <= maxlines {
 		match := rx.Match([]byte(scanner.Text()))
 		if !match {
 			log.Fatalf("Did not match format %s on line %d", cfg.TimeStampFormat, lineNumber)
@@ -130,7 +130,7 @@ func AverageMinutesFlow() {
 		}
 		f := commonprompts.InputPrompt(fileNameContent)
 
-		times := ReadFileByLine(f, cfg.TimeStampPattern)
+		times := ReadFileByLine(f, cfg.TimeStampPattern, 50)
 		avgMinutes := AverageMinutes(times)
 		fmt.Println(avgMinutes)
 
