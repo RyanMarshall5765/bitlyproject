@@ -12,11 +12,11 @@ import (
 func AverageMinutesFlow() {
 	selectContent := commonprompts.SelectContent{
 		Label: "Please pick an input method",
-		Items: []string{"Enter Manually", "Provided File"},
+		Items: []string{"Enter Manually", "Provide File"},
 	}
 	choice := commonprompts.SelectPrompt(selectContent)
 
-	if choice == "Provided File" {
+	if choice == "Provide File" {
 		fileNameContent := commonprompts.PromptContent{
 			Label:      "Please provide the location of the file",
 			Validation: promptvalidations.ValidateFile(),
@@ -26,7 +26,7 @@ func AverageMinutesFlow() {
 		times := utils.ReadFileByLine(f, cfg.TimeStampPattern)
 		fmt.Println(utils.AverageMinutes(times))
 
-	} else if choice == "Typed Manually" {
+	} else if choice == "Enter Manually" {
 		numInputsContent := commonprompts.PromptContent{
 			Label:      "How many inputs do you have?",
 			Validation: promptvalidations.ValidateRange(1, 50),
