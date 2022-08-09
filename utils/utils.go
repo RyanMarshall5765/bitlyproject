@@ -17,7 +17,7 @@ import (
 
 func AverageMinutes(constructedTimes []string) int {
 	var totalMinutes float64
-	// Not sure how to set a date as config varible. Can't set as const in cfg.
+	// Not sure how to set a date as config variable. Can't set as const in cfg.
 	startDate := time.Date(0, 0, 1, 8, 0, 0, 0, time.UTC)
 	for _, constructedTime := range constructedTimes {
 		deconstructedTime, _ := DeconstructTimeString(constructedTime)
