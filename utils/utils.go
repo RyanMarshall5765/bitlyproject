@@ -79,6 +79,15 @@ func ReadFileByLine(file string, pattern string) (lineContent []string) {
 		log.Fatal(err)
 	}
 
+	fi, err := f.Stat()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if fi.Size() == 0 {
+		log.Fatal("file empty please provide a file with inputs.")
+	}
+	fmt.Println(fi.Size())
 	defer f.Close()
 
 	scanner := bufio.NewScanner(f)
