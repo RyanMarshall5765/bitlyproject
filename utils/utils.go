@@ -2,6 +2,7 @@ package utils
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"math"
 	"os"
@@ -10,6 +11,8 @@ import (
 	"time"
 
 	"github.com/RyanMarshall5765/bitlyproject/cfg"
+	"github.com/RyanMarshall5765/bitlyproject/commonprompts"
+	"github.com/RyanMarshall5765/bitlyproject/promptvalidations"
 )
 
 func AverageMinutes(constructedTimes []string) int {
@@ -98,4 +101,43 @@ func ReadFileByLine(file string, pattern string) (lineContent []string) {
 	}
 
 	return
+}
+
+func AverageMinutesFlow() {
+	const (
+		ENTERMANUALLY = "Enter Manually"
+		PROVIDEFILE   = "Provide File"
+	)
+	selectContent := commonprompts.SelectContent{
+		Label: "Please pick an input method",
+		Items: []string{ENTERMANUALLY, PROVIDEFILE},
+	}
+	choice := commonprompts.SelectPrompt(selectContent)
+
+	if choice == PROVIDEFILE {
+		fileNameContent := commonprompts.PromptContent{
+			Label:      "Please provide the location of the file",
+			Validation: promptvalidations.ValidateFile(),
+		}
+		f := commonprompts.InputPrompt(fileNameContent)
+
+		times := ReadFileByLine(f, cfg.TimeStampPattern)
+		avgMinutes := AverageMinutes(times)
+		fmt.Println(avgMinutes)
+
+	} else if choice == ENTERMANUALLY {
+		numInputsContent := commonprompts.PromptContent{
+			Label:      "How many inputs do you have?",
+			Validation: promptvalidations.ValidateRange(1, 50),
+		}
+		numRacers := commonprompts.InputPrompt(numInputsContent)
+
+		manualInputXTimesContent := commonprompts.PromptContent{
+			Label:      "Input racer end date",
+			Validation: promptvalidations.ValidateStringPattern(cfg.TimeStampPattern),
+		}
+		times := commonprompts.InputPromptLoop(manualInputXTimesContent, numRacers)
+		avgMinutes := AverageMinutes(times)
+		fmt.Println(avgMinutes)
+	}
 }

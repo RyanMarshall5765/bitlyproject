@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/RyanMarshall5765/bitlyproject/commonprompts"
+	"github.com/RyanMarshall5765/bitlyproject/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -30,13 +31,14 @@ func Execute() {
 }
 
 func PickProgram() {
+	const AVERAGEMINUTES = "Average Minutes"
 	selectContent := commonprompts.SelectContent{
 		Label: "Please pick a program",
-		Items: []string{"Average Minutes"},
+		Items: []string{AVERAGEMINUTES},
 	}
 	choice := commonprompts.SelectPrompt(selectContent)
 
-	if choice == "Average Minutes" {
-		AverageMinutesFlow()
+	if choice == AVERAGEMINUTES {
+		utils.AverageMinutesFlow()
 	}
 }
