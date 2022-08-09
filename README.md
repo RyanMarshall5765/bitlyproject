@@ -1,5 +1,10 @@
 ### CLI Project
 
+### Known Issue
+```
+promptui library does not work with a standalone git bash terminal. It however, does work with git bash from vscode.
+Tracked Issue: https://github.com/manifoldco/promptui/issues/208 
+```
 ### Dependencies
 Download golang at 
 ```
