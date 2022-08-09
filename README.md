@@ -17,3 +17,9 @@ go run main.go
 ```
 go run main.go
 ```
+
+
+### Notes
+
+There is an example.txt file for the file input method provided. 
+Thought this might be easier for a user than using CLI for each input.
