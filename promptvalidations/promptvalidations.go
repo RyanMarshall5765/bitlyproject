@@ -23,7 +23,7 @@ func ValidateFile() func(string) error {
 func ValidateRange(start, end int) func(string) error {
 	return func(input string) error {
 		intInput, err := strconv.Atoi(input)
-		if intInput < 1 || intInput > 50 || err != nil {
+		if intInput < start || intInput > end || err != nil {
 			return fmt.Errorf("invalid input! expected number from: %d-%d", start, end)
 		}
 		return nil
