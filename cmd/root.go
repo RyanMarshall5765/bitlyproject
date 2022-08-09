@@ -14,11 +14,14 @@ var rootCmd = &cobra.Command{
 	Short: "Program for a boat race",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(`Average Minutes: Returns the average of all racers finish time.
-			-- Enter Manually: Asks for how many racers you wish to input. Then the inputs in the format hh:mm xM, DAY n
-			-- Provide File: Takes a text file where each input is on a new line with the format hh:mm xM, DAY n
+		fmt.Println(` Race Start: 08:00 AM, DAY 1
+	Average Minutes: Returns the average of all racers finish time.
+		-- Enter Manually: Asks for how many racers you wish to input. Then the inputs in the format hh:mm xM, DAY n
+		-- Provide File: Takes a text file where each input is on a new line with the format hh:mm xM, DAY n
+Provide File Example: There is a example.txt you may use
 Format Explanation: hh:mm xM, DAY n
-hh is the hour 01-12 , mm is the minute 0-59, x is P or A for AM/PM, and n is the day they finished 1-99.`)
+hh is the hour 01-12 , mm is the minute 0-59, x is P or A for AM/PM, and n is the day they finished 1-99.
+Example: 12:00 PM, DAY 5`)
 		PickProgram()
 	},
 }
