@@ -12,7 +12,7 @@ import (
 func AverageMinutesFlow() {
 	selectContent := commonprompts.SelectContent{
 		Label: "Please pick an input method",
-		Items: []string{"Typed Manually", "Provided File"},
+		Items: []string{"Enter Manually", "Provided File"},
 	}
 	choice := commonprompts.SelectPrompt(selectContent)
 
